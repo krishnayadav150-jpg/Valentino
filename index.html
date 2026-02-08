@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Babuni 💖</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #ffb6c1, #ffd1dc, #ffe5b4);
+  overflow: hidden;
+  color: white;
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.container {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding-top: 60px;
+}
+
+h1 { font-size: 2.8rem; margin-bottom: 10px; }
+h2 { font-weight: 400; }
+
+button {
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  margin: 15px;
+  transition: transform 0.3s ease;
+}
+
+#yesBtn {
+  background: #ff4d6d;
+  color: white;
+}
+#yesBtn:hover { transform: scale(1.1); }
+
+#noBtn {
+  background: #ffffff55;
+  color: white;
+  position: absolute;
+}
+
+/* Falling emojis */
+.fall {
+  position: absolute;
+  top: -50px;
+  font-size: 26px;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Image reveal */
+#imageWrap {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+}
+
+#blurBg {
+  position: absolute;
+  inset: 0;
+  background: url("special.jpg") center/cover no-repeat;
+  filter: blur(25px) brightness(0.8);
+  transform: scale(1.1);
+}
+
+#photo {
+  position: relative;
+  width: 70%;
+  max-width: 320px;
+  border: 12px solid white;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  transform: scale(0.95) rotate(-2deg);
+  opacity: 0;
+  animation: reveal 2s forwards, kenburns 15s ease-in-out infinite alternate;
+}
+
+@keyframes reveal {
+  to { opacity: 1; transform: scale(1) rotate(1deg); }
+}
+
+@keyframes kenburns {
+  from { transform: scale(1) translate(0,0); }
+  to { transform: scale(1.08) translate(-10px,-10px); }
+}
+
+/* Heartbeat */
+#heart {
+  position: fixed;
+  font-size: 90px;
+  z-index: 7;
+  opacity: 0;
+  animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.15); }
+  50% { transform: scale(1); }
+}
+
+/* Screen glow */
+#glow {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,105,135,0.25);
+  opacity: 0;
+  z-index: 4;
+  animation: glowPulse 1.2s infinite;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0; }
+  25% { opacity: 0.6; }
+  50% { opacity: 0; }
+}
+
+/* Whisper */
+#whisper {
+  position: fixed;
+  bottom: 20%;
+  font-size: 2rem;
+  z-index: 8;
+  opacity: 0;
+  animation: whisperPulse 1.2s infinite;
+}
+
+@keyframes whisperPulse {
+  0% { opacity: 0; transform: scale(1); }
+  25% { opacity: 1; transform: scale(1.05); }
+  50% { opacity: 0; }
+}
+
+/* Messages */
+#finalMsg {
+  position: fixed;
+  bottom: 10%;
+  font-size: 1.5rem;
+  z-index: 9;
+  display: none;
+}
+#screenshot {
+  position: fixed;
+  top: 10%;
+  font-size: 1.2rem;
+  z-index: 9;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Aditi aka Babuni 💖</h1>
+  <h2>Will you be my Valentine? 💘</h2>
+
+  <button id="yesBtn">Yes ❤️</button>
+  <button id="noBtn">No 😏</button>
+</div>
+
+<!-- Image & Effects -->
+<div id="imageWrap">
+  <div id="blurBg"></div>
+  <img id="photo" src="special.jpg" alt="Us ❤️" />
+</div>
+
+<div id="glow"></div>
+<div id="heart">❤️</div>
+<div id="whisper">Babuni… 💓</div>
+<div id="finalMsg">It might look like, but I never forget 💞</div>
+<div id="screenshot">Screenshot this moment 📸</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.left = Math.random() * 80 + "vw";
+  noBtn.style.top = Math.random() * 80 + "vh";
+  noBtn.style.transform = "scale(0.9)";
+});
+
+document.getElementById("yesBtn").onclick = () => {
+
+  /* Start background music AFTER user click */
+  const music = document.createElement("iframe");
+  music.src = "https://www.youtube.com/embed/_d2Yux449ds?autoplay=1&loop=1&playlist=_d2Yux449ds";
+  music.allow = "autoplay";
+  music.style.display = "none";
+  document.body.appendChild(music);
+
+  /* Falling emojis */
+  ["❤️","🌹","🦋"].forEach(e => {
+    for(let i=0;i<20;i++){
+      let el = document.createElement("div");
+      el.className = "fall";
+      el.innerText = e;
+      el.style.left = Math.random()*100 + "vw";
+      el.style.animationDuration = (4 + Math.random()*4) + "s";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 8000);
+    }
+  });
+
+  /* Show cinematic elements */
+  document.getElementById("imageWrap").style.display = "flex";
+  document.getElementById("heart").style.opacity = 1;
+  document.getElementById("glow").style.opacity = 1;
+  document.getElementById("whisper").style.opacity = 1;
+  document.getElementById("finalMsg").style.display = "block";
+  document.getElementById("screenshot").style.display = "block";
+
+  /* Heartbeat vibration */
+  if (navigator.vibrate) {
+    navigator.vibrate([150,100,150,400,150,100,150]);
+  }
+
+  /* Open WhatsApp */
+  setTimeout(() => {
+    window.open(
+      "https://wa.me/919717288529?text=I%20said%20YES%20Babuni%20💖%20—%20see%20you%20this%20Valentine%20❤️",
+      "_blank"
+    );
+  }, 3000);
+};
+</script>
+
+</body>
+</html>
